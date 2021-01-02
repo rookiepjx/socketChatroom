@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<body>
+		<div id="login">
+			<div class="form">
+				<div class="title">用户登录</div>
+				<div class="username">
+					<label for="username">用户名</label>
+					<input type="text" name="username" id="username" />
+				</div>
+				<div class="password">
+					<label for="password">密&nbsp;&nbsp;&nbsp;码</label>
+					<input type="password" name="password" id="password" />
+				</div>
+				<div class="avatars">
+					<div class="avatar selected">
+						<img src="images/face-male-1.jpg" alt="" />
+					</div>
+					<div class="avatar"><img src="images/face-male-2.jpg" alt="" /></div>
+					<div class="avatar"><img src="images/face-male-3.jpg" alt="" /></div>
+					<div class="avatar"><img src="images/face-male-4.jpg" alt="" /></div>
+					<div class="avatar">
+						<img src="images/face-female-1.jpg" alt="" />
+					</div>
+					<div class="avatar">
+						<img src="images/face-female-2.jpg" alt="" />
+					</div>
+					<div class="avatar">
+						<img src="images/face-female-3.jpg" alt="" />
+					</div>
+					<div class="avatar">
+						<img src="images/face-female-4.jpg" alt="" />
+					</div>
+				</div>
+				<button class="btn">登录</button>
+			</div>
+		</div>
+		<div id="chat">
+			<!-- <h3>当前登录用户<span class="loginUser"></span></h3>
+			<img class="userAvatar" src="" alt=""> -->
+			<div class="container">
+				<aside class="left">
+					<div class="info">
+						<div class="loginAvatar">
+							<img src="" alt="" />
+						</div>
+						<div class="loginUser"></div>
+					</div>
+					<div class="divider"></div>
+					<div class="listTitle">用户列表</div>
+					<div class="userList"></div>
+				</aside>
+				<section class="right">
+					<div class="titleBar"></div>
+					<div class="content"></div>
+					<div class="textarea"></div>
+				</section>
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/index.js"></script>
+	</body>
+</html>
