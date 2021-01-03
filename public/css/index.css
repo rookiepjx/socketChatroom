@@ -227,6 +227,7 @@ input {
 .listTitle{
 	color:#fff;
 	font-weight: 200;
+	margin-bottom: 10px;
 }
 .container .right {
 	width: 70%;

@@ -1,8 +1,7 @@
 const socket = io("localhost:3000");
-
+const user = {};
 // 获取用户登录信息
 const getUserInfo = () => {
-	const user = {};
 	user.username = $("#username").val();
 	user.password = $("#password").val();
 	user.avatar = $(".avatar.selected img").attr("src");
@@ -44,6 +43,18 @@ socket.on("send", (data) => {
 });
 
 // 注册后端userList事件
-socket.on("userList",(data) => {
-	console.log(data)
-})
+socket.on("userList", (userList) => {
+	console.log(user.username);
+	userList.filter(item => item.username !== user.username)
+	console.log(userList);
+	$(".userList").html("");
+	const elements = userList.map((item) => {
+		return `<div class="info">
+								<div class="loginAvatar">
+									<img src=${item.avatar} alt="" />
+								</div>
+								<div class="loginUser">${item.username}</div>
+							</div>`;
+	});
+	$(".userList").append(elements);
+});

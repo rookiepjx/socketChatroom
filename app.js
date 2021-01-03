@@ -14,10 +14,13 @@ app.use(require("express").static("public"));
 
 const userList = [];
 io.on("connection", (socket) => {
-	console.log("-----用户已连接-----");
+	console.log("-----用户已连接-----")
 
 	// 1.用户登录成功，返回登录信息
 	socket.on("login", (data) => {
+		// 保存当前连接的用户
+		socket.username = data.username
+		socket.avatar = data.avatar
 		let flag = userList.find((item) => item.username === data.username);
 		if (flag) {
 			socket.emit(
@@ -30,8 +33,10 @@ io.on("connection", (socket) => {
 				status: 200,
 				msg: "登录成功",
 			});
-			socket.emit("send",res);
-			socket.emit("userList",userList)
+			socket.emit("send", res);
+			// 通过io对象广播事件
+			// const filteredLIst = userList.filter(item => item.username !== socket.username)
+			io.emit("userList", userList);
 		}
 	});
 
