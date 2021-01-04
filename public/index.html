@@ -43,6 +43,7 @@
 		</div>
 		<div id="chat">
 			<div class="container">
+				<!-- 左边用户列表 -->
 				<aside class="left">
 					<div class="info">
 						<div class="loginAvatar">
@@ -52,14 +53,43 @@
 					</div>
 					<div class="divider"></div>
 					<div class="listTitle">用户列表</div>
-					<div class="userList">
-						
-					</div>
+					<div class="userList"></div>
 				</aside>
+				<!-- 右边聊天区 -->
 				<section class="right">
-					<div class="titleBar"></div>
-					<div class="content"></div>
-					<div class="textarea"></div>
+					<div class="titleBar">聊天室<span class="userNum"></span></div>
+					<div class="content">
+						<div class="msg_tips">"pjx"加入了群聊</div>
+						<div class="msg_tips">"pjx"退出了群聊</div>
+						<div class="msg_receive">
+							<div class="msg_avatar"><img src="./images/face-female-1.jpg" alt=""></div>
+							<div class="msg_content">你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</div>
+						</div>
+						<div class="msg_send">
+							<div class="msg_content">你好</div>
+							<div class="msg_avatar"><img src="./images/face-female-2.jpg" alt=""></div>
+							
+						</div>
+					</div>
+					<div class="textarea">
+						<div class="tool">
+							<label for="emoji">
+								<a href="javascript:void(0);" id="emoji" class="emoji">
+									<img class="icon" src="./images/emoji.png" alt="" />
+								</a>
+							</label>
+							<label for="file">
+								<a href="javascript:void(0);" class="file">
+									<img class="icon" src="./images/file.png" alt="" />
+									<input type="file" id="file" style="display: none" />
+								</a>
+							</label>
+						</div>
+						<div class="input" contenteditable>
+							
+						</div>
+						<button class="send">发送</button>
+					</div>
 				</section>
 			</div>
 		</div>

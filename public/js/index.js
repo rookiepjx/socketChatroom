@@ -38,17 +38,25 @@ socket.on("send", (data) => {
 		// 登录失败
 		$("#username").val("");
 		$("#password").val("");
+		alert(data.msg);
 	}
-	alert(data.msg);
 });
 
 // 注册后端userList事件
 socket.on("userList", (userList) => {
 	console.log(user.username);
-	userList.filter(item => item.username !== user.username)
+	userList.filter((item) => item.username !== user.username);
 	console.log(userList);
 	$(".userList").html("");
 	const elements = userList.map((item) => {
+		if (item.username == user.username) {
+			return `<div class="info">
+								<div class="loginAvatar">
+									<img src=${item.avatar} alt="" />
+								</div>
+								<div class="loginUser">${item.username}</div>
+							</div>`;
+		}
 		return `<div class="info">
 								<div class="loginAvatar">
 									<img src=${item.avatar} alt="" />
