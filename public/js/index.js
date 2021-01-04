@@ -44,13 +44,15 @@ socket.on("send", (data) => {
 
 // 注册后端userList事件
 socket.on("userList", (userList) => {
-	console.log(user.username);
-	userList.filter((item) => item.username !== user.username);
-	console.log(userList);
+	// 获取聊天室人数
+	const userNum = userList.length
+	$(".userNum").text(`(${userNum})`)
+	// 剔除自己
+	// userList.filter((item) => item.username !== user.username);
 	$(".userList").html("");
 	const elements = userList.map((item) => {
 		if (item.username == user.username) {
-			return `<div class="info">
+			return `<div class="info  self">
 								<div class="loginAvatar">
 									<img src=${item.avatar} alt="" />
 								</div>

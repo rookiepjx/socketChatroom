@@ -239,7 +239,7 @@ input {
 	white-space: nowrap;
 	flex: 1;
 }
-.self {
+.info.self .loginUser {
 	color: #22a7f2;
 }
 .left .divider {
