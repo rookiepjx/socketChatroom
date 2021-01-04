@@ -47,12 +47,10 @@ socket.on("userList", (userList) => {
 	// 获取聊天室人数
 	const userNum = userList.length
 	$(".userNum").text(`(${userNum})`)
-	// 剔除自己
-	// userList.filter((item) => item.username !== user.username);
 	$(".userList").html("");
 	const elements = userList.map((item) => {
 		if (item.username == user.username) {
-			return `<div class="info  self">
+			return `<div class="info self">
 								<div class="loginAvatar">
 									<img src=${item.avatar} alt="" />
 								</div>
