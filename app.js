@@ -35,8 +35,8 @@ io.on("connection", (socket) => {
 			});
 			socket.emit("send", res);
 			// 通过io对象广播事件
-			// const filteredLIst = userList.filter(item => item.username !== socket.username)
 			io.emit("userList", userList);
+			io.emit("userEnter", data.username);
 		}
 	});
 

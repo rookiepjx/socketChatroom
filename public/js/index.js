@@ -45,8 +45,8 @@ socket.on("send", (data) => {
 // 注册后端userList事件
 socket.on("userList", (userList) => {
 	// 获取聊天室人数
-	const userNum = userList.length
-	$(".userNum").text(`(${userNum})`)
+	const userNum = userList.length;
+	$(".userNum").text(`(${userNum})`);
 	$(".userList").html("");
 	const elements = userList.map((item) => {
 		if (item.username == user.username) {
@@ -65,4 +65,9 @@ socket.on("userList", (userList) => {
 							</div>`;
 	});
 	$(".userList").append(elements);
+});
+
+socket.on("userEnter", (data) => {
+	const ele = `<div class="msg_tips">"${data}"加入了群聊</div>`;
+	$(".content").append(ele);
 });
