@@ -55,6 +55,11 @@ io.on("connection", (socket) => {
 	socket.on("msgToServer", (data) => {
 		io.emit("msgToUsers", data);
 	});
+
+	// 4.监听用户发送的图片并转发给所有人
+	socket.on("imgToServer",data => {
+		io.emit("imgToUsers",data)
+	})
 });
 
 //

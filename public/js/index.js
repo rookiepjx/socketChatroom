@@ -94,13 +94,6 @@ $(".send").click(() => {
 		return;
 	}
 	$(".input").text("");
-	// const ele = `<div class="msg_send">
-	// 						<div class="msg_content">${msg}</div>
-	// 						<div class="msg_avatar">
-	// 							<img src="./images/face-female-2.jpg" alt="" />
-	// 						</div>
-	// 					</div>`;
-	// $(".content").append(ele);
 	scrollIntoView();
 	// 2.将消息发到服务端转发给群成员
 	socket.emit("msgToServer", {
@@ -129,4 +122,43 @@ socket.on("msgToUsers", (data) => {
 							</div>`;
 		$(".content").append(ele);
 	}
+});
+
+// 用户发送图片
+$("#file").on("change", function () {
+	const file = this.files[0];
+	const fr = new FileReader();
+	fr.readAsDataURL(file);
+	fr.onload = () => {
+		socket.emit("imgToServer", {
+			username: user.username,
+			avatar: user.avatar,
+			img: fr.result,
+		});
+	};
+});
+
+// 用户接受图片
+socket.on("imgToUsers", (data) => {
+	if (data.username == user.username) {
+		const ele = `<div class="msg_send">
+								<div class="msg_content"><img src="${data.img}" alt=""/></div>
+								<div class="msg_avatar">
+									<img src="${data.avatar}" alt="" />
+								</div>
+							</div>`;
+		$(".content").append(ele);
+	} else {
+		const ele = `<div class="msg_receive">
+								<div class="msg_avatar">
+									<img src="${data.avatar}" alt="" />
+								</div>
+								<div class="msg_content"><img src="${data.img}" alt=""/></div>
+							</div>`;
+		$(".content").append(ele);
+	}
+	// 等待图片加载完成滚动到底部
+	$(".msg_content img:last").on("load", () => {
+		scrollIntoView();
+	});
 });
