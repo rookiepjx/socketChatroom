@@ -12,11 +12,13 @@ app.get("/", (req, res) => {
 // 开放静态资源
 app.use(require("express").static("public"));
 
+// 保存用户列表
 const userList = [];
+
+// 监听用户连接
 io.on("connection", (socket) => {
 	console.log("-----用户已连接-----")
-
-	// 1.用户登录成功，返回登录信息
+	// 1.用户登录成功，返回用户列表，添加进入提示
 	socket.on("login", (data) => {
 		// 保存当前连接的用户
 		socket.username = data.username
@@ -40,5 +42,14 @@ io.on("connection", (socket) => {
 		}
 	});
 
-	// 2.
+	// 2.用户断开连接，更新用户列表，添加离开提示
+	socket.on("disconnect",() => {
+		let index = userList.findIndex(item => item.username == socket.username)
+		userList.splice(index,1)
+		// io对象广播离开事件
+		io.emit("userLeave",socket.username)
+		io.emit("userList",userList)
+	})
 });
+
+// 

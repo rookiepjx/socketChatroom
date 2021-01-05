@@ -67,7 +67,33 @@ socket.on("userList", (userList) => {
 	$(".userList").append(elements);
 });
 
+// 自动滚动到可视区的底部
+const scrollIntoView = () => {
+	$(".content").children(":last").get(0).scrollIntoView(false);
+};
+
+// 用户进入提示
 socket.on("userEnter", (data) => {
 	const ele = `<div class="msg_tips">"${data}"加入了群聊</div>`;
 	$(".content").append(ele);
+	scrollIntoView();
+});
+
+// 用户离开提示
+socket.on("userLeave", (data) => {
+	const ele = `<div class="msg_tips">"${data}"离开了群聊</div>`;
+	$(".content").append(ele);
+	scrollIntoView();
+});
+
+// 用户发送消息
+$(".send").click(() => {
+	const ele = `<div class="msg_send">
+							<div class="msg_content">你好</div>
+							<div class="msg_avatar">
+								<img src="./images/face-female-2.jpg" alt="" />
+							</div>
+						</div>`;
+	$(".content").append(ele);
+	scrollIntoView();
 });

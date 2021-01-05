@@ -269,7 +269,9 @@ input {
 }
 .right .content {
 	padding: 10px;
+	margin-bottom: 10px;
 	flex: 1;
+	overflow: auto;
 }
 .content .msg_tips {
 	color: #d3d3d3;
