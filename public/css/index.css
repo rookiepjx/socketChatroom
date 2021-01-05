@@ -272,7 +272,6 @@ input {
 	margin-bottom: 10px;
 	flex: 1;
 	overflow-y: auto;
-	overflow-x: hidden;
 	word-break: break-all;
 }
 .right .content .msg_content img{

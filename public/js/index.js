@@ -94,7 +94,6 @@ $(".send").click(() => {
 		return;
 	}
 	$(".input").text("");
-	scrollIntoView();
 	// 2.将消息发到服务端转发给群成员
 	socket.emit("msgToServer", {
 		msg: msg,
@@ -122,6 +121,7 @@ socket.on("msgToUsers", (data) => {
 							</div>`;
 		$(".content").append(ele);
 	}
+	scrollIntoView();
 });
 
 // 用户发送图片
