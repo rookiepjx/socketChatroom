@@ -17,12 +17,12 @@ const userList = [];
 
 // 监听用户连接
 io.on("connection", (socket) => {
-	console.log("-----用户已连接-----")
+	console.log("-----用户已连接-----");
 	// 1.用户登录成功，返回用户列表，添加进入提示
 	socket.on("login", (data) => {
 		// 保存当前连接的用户
-		socket.username = data.username
-		socket.avatar = data.avatar
+		socket.username = data.username;
+		socket.avatar = data.avatar;
 		let flag = userList.find((item) => item.username === data.username);
 		if (flag) {
 			socket.emit(
@@ -43,13 +43,18 @@ io.on("connection", (socket) => {
 	});
 
 	// 2.用户断开连接，更新用户列表，添加离开提示
-	socket.on("disconnect",() => {
-		let index = userList.findIndex(item => item.username == socket.username)
-		userList.splice(index,1)
+	socket.on("disconnect", () => {
+		let index = userList.findIndex((item) => item.username == socket.username);
+		userList.splice(index, 1);
 		// io对象广播离开事件
-		io.emit("userLeave",socket.username)
-		io.emit("userList",userList)
-	})
+		io.emit("userLeave", socket.username);
+		io.emit("userList", userList);
+	});
+
+	// 3.监听用户发送的消息并转发给所有人
+	socket.on("msgToServer", (data) => {
+		io.emit("msgToUsers", data);
+	});
 });
 
-// 
+//

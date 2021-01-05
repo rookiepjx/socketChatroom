@@ -88,12 +88,45 @@ socket.on("userLeave", (data) => {
 
 // 用户发送消息
 $(".send").click(() => {
-	const ele = `<div class="msg_send">
-							<div class="msg_content">你好</div>
-							<div class="msg_avatar">
-								<img src="./images/face-female-2.jpg" alt="" />
-							</div>
-						</div>`;
-	$(".content").append(ele);
+	// 1.在自己界面中添加消息框
+	const msg = $(".input").text();
+	if (!msg.trim()) {
+		return;
+	}
+	$(".input").text("");
+	// const ele = `<div class="msg_send">
+	// 						<div class="msg_content">${msg}</div>
+	// 						<div class="msg_avatar">
+	// 							<img src="./images/face-female-2.jpg" alt="" />
+	// 						</div>
+	// 					</div>`;
+	// $(".content").append(ele);
 	scrollIntoView();
+	// 2.将消息发到服务端转发给群成员
+	socket.emit("msgToServer", {
+		msg: msg,
+		username: user.username,
+		avatar: user.avatar,
+	});
+});
+
+// 用户接受消息
+socket.on("msgToUsers", (data) => {
+	if (data.username == user.username) {
+		const ele = `<div class="msg_send">
+								<div class="msg_content">${data.msg}</div>
+								<div class="msg_avatar">
+									<img src="${data.avatar}" alt="" />
+								</div>
+							</div>`;
+		$(".content").append(ele);
+	} else {
+		const ele = `<div class="msg_receive">
+								<div class="msg_avatar">
+									<img src="${data.avatar}" alt="" />
+								</div>
+								<div class="msg_content">${data.msg}</div>
+							</div>`;
+		$(".content").append(ele);
+	}
 });

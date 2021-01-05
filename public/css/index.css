@@ -271,7 +271,8 @@ input {
 	padding: 10px;
 	margin-bottom: 10px;
 	flex: 1;
-	overflow: auto;
+	overflow-y: auto;
+	word-break: break-all;
 }
 .content .msg_tips {
 	color: #d3d3d3;
