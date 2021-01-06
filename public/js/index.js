@@ -89,11 +89,12 @@ socket.on("userLeave", (data) => {
 // 用户发送消息
 $(".send").click(() => {
 	// 1.在自己界面中添加消息框
-	const msg = $(".input").text();
-	if (!msg.trim()) {
+	let msg = $(".input").html();
+	$(".input").html("");
+	msg = msg.replace(/&(nbsp;)/g,"").trim()
+	if (!msg) {
 		return;
 	}
-	$(".input").text("");
 	// 2.将消息发到服务端转发给群成员
 	socket.emit("msgToServer", {
 		msg: msg,
@@ -160,5 +161,28 @@ socket.on("imgToUsers", (data) => {
 	// 等待图片加载完成滚动到底部
 	$(".msg_content img:last").on("load", () => {
 		scrollIntoView();
+	});
+});
+
+// 发送表情
+$("#emoji").click(() => {
+	$(".input").emoji({
+		button: "#emoji",
+		showTab: false,
+		animation: "fade",
+		icons: [
+			{
+				name: "QQ表情",
+				path: "images/qq/",
+				maxNum: 91,
+				file: ".gif",
+			},
+			{
+				name: "贴吧表情",
+				path: "images/tieba/",
+				maxNum: 50,
+				file: ".jpg",
+			},
+		],
 	});
 });

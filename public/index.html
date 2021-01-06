@@ -3,9 +3,13 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="lib/css/jquery.mCustomScrollbar.min.css" />
+		<!--the css for this plugin-->
+		<link rel="stylesheet" href="lib/css/jquery.emoji.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<title>Document</title>
 	</head>
-	<link rel="stylesheet" type="text/css" href="css/index.css" />
+
 	<body>
 		<div id="login">
 			<div class="form">
@@ -77,7 +81,8 @@
 					</div>
 					<div class="textarea">
 						<div class="tool">
-							<label for="emoji" id="emoji" class="emoji"> </label>
+							
+							<span  id="emoji" class="emoji"> </span>
 							<label for="file" class="file">
 								<input type="file" id="file" style="display: none" />
 							</label>
@@ -90,6 +95,12 @@
 		</div>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/js/jquery.min.js"></script>
+		<!--(Optional) the js for jquery.mCustomScrollbar's addon-->
+		<!-- <script src="lib/script/jquery.mousewheel-3.0.6.min.js"></script> -->
+		<!--the js for jquery.mCustomScrollbar-->
+		<script src="lib/script/jquery.mCustomScrollbar.min.js"></script>
+		<!--the js for this plugin-->
+		<script src="lib/script/jquery.emoji.min.js"></script>
 		<script src="/js/index.js"></script>
 	</body>
 </html>
