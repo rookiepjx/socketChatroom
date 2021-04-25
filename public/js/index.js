@@ -1,5 +1,6 @@
 const socket = io("localhost:3000");
 const user = {};
+
 // 获取用户登录信息
 const getUserInfo = () => {
 	user.username = $("#username").val();
@@ -91,7 +92,7 @@ $(".send").click(() => {
 	// 1.在自己界面中添加消息框
 	let msg = $(".input").html();
 	$(".input").html("");
-	msg = msg.replace(/&(nbsp;)/g,"").trim()
+	msg = msg.replace(/&(nbsp;)/g, "").trim();
 	if (!msg) {
 		return;
 	}
@@ -102,6 +103,26 @@ $(".send").click(() => {
 		avatar: user.avatar,
 	});
 });
+
+// 回车发送消息
+document.onkeydown = function (e) {
+	var ev = document ? window.event : e;
+	if (ev.keyCode == 13) {
+		// 1.在自己界面中添加消息框
+		let msg = $(".input").html();
+		$(".input").html("");
+		msg = msg.replace(/&(nbsp;)/g, "").trim();
+		if (!msg) {
+			return;
+		}
+		// 2.将消息发到服务端转发给群成员
+		socket.emit("msgToServer", {
+			msg: msg,
+			username: user.username,
+			avatar: user.avatar,
+		});
+	}
+};
 
 // 用户接受消息
 socket.on("msgToUsers", (data) => {
